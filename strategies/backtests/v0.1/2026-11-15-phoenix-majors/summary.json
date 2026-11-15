@@ -1,0 +1,100 @@
+[
+ {
+  "trial": 1,
+  "setup": "S1 H4 off",
+  "verdict": "FAIL",
+  "holdout": {
+   "n": 73,
+   "win_rate": 0.4520547945205479,
+   "expectancy_r": -0.27932420540740766,
+   "ci_low": -0.4518005772345434,
+   "ci_high": -0.09577987285358441,
+   "total_r": -20.39066699474076,
+   "cost_r": 0.2680423309755546,
+   "return": -0.09749174399196348,
+   "max_dd": -0.09749174399196348,
+   "ret_over_dd": -1.0,
+   "longest_losing": 9,
+   "exposure": 0.042465156794425085
+  },
+  "signals": 926
+ },
+ {
+  "trial": 2,
+  "setup": "S1 H4 on",
+  "verdict": "FAIL",
+  "holdout": {
+   "n": 58,
+   "win_rate": 0.46551724137931033,
+   "expectancy_r": -0.2678964633123026,
+   "ci_low": -0.47505688539615065,
+   "ci_high": -0.053584195997008956,
+   "total_r": -15.53799487211355,
+   "cost_r": 0.24228711601126657,
+   "return": -0.07523468933718347,
+   "max_dd": -0.07523468933718336,
+   "ret_over_dd": -1.0000000000000016,
+   "longest_losing": 7,
+   "exposure": 0.039017131242741
+  },
+  "signals": 573
+ },
+ {
+  "trial": 3,
+  "setup": "S3 H4 off",
+  "verdict": "FAIL",
+  "holdout": {
+   "n": 36,
+   "win_rate": 0.3611111111111111,
+   "expectancy_r": -0.11466931330532419,
+   "ci_low": -0.486931263212717,
+   "ci_high": 0.2817726398034091,
+   "total_r": -4.128095278991671,
+   "cost_r": 0.08037882502473426,
+   "return": -0.02104958362454168,
+   "max_dd": -0.06143647380896333,
+   "ret_over_dd": -0.3426235641387125,
+   "longest_losing": 5,
+   "exposure": 0.45586527293844364
+  },
+  "signals": 942
+ },
+ {
+  "trial": 4,
+  "setup": "S3 H4 on",
+  "verdict": "FAIL",
+  "holdout": {
+   "n": 32,
+   "win_rate": 0.40625,
+   "expectancy_r": -0.04359716917628112,
+   "ci_low": -0.45254715071372875,
+   "ci_high": 0.387009838496537,
+   "total_r": -1.3951094136409958,
+   "cost_r": 0.07690557984554341,
+   "return": -0.007529135166922329,
+   "max_dd": -0.0474564937314339,
+   "ret_over_dd": -0.1586534228493841,
+   "longest_losing": 6,
+   "exposure": 0.42755516840882696
+  },
+  "signals": 659
+ },
+ {
+  "trial": 5,
+  "setup": "S4 H4 off",
+  "verdict": "INCONCLUSIVE",
+  "holdout": {
+   "n": 0
+  },
+  "signals": 1
+ },
+ {
+  "trial": 6,
+  "setup": "S4 H4 on",
+  "verdict": "INCONCLUSIVE",
+  "holdout": {
+   "n": 0
+  },
+  "signals": 1
+ }
+]
