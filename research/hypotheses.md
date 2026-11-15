@@ -70,3 +70,9 @@ Append rows. Do not edit earlier rows.
 
 | Date | Hypothesis | Strategy version | Data range | Trials used | Result | Report |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-11-15 | H1 (S1, H4 off) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 1 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | H1+H4 (S1, H4 on) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 2 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S3 (H4 off) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 3 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S3+H4 (H4 on) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 4 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S4 (H4 off) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 5 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S4+H4 (H4 on) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 6 | pending | strategies/backtests/v0.1/ |

@@ -1,0 +1,128 @@
+{
+ "source": "https://perp-api.phoenix.trade",
+ "fetched_at": "2026-11-15T10:05:41.521480+00:00",
+ "files": [
+  {
+   "path": "data/raw/phoenix/candles/15m/SOL.parquet",
+   "symbol": "SOL",
+   "kind": "candles_15m",
+   "rows": 36000,
+   "first_ms": 1762336800000,
+   "last_ms": 1794735900000,
+   "gaps": 0,
+   "sha256": "2171764dd51259cb3ab61afea080a1e3f67da6ee4876813b9bd357deb11aabe0"
+  },
+  {
+   "path": "data/raw/phoenix/candles/1h/SOL.parquet",
+   "symbol": "SOL",
+   "kind": "candles_1h",
+   "rows": 10000,
+   "first_ms": 1758736800000,
+   "last_ms": 1794733200000,
+   "gaps": 0,
+   "sha256": "c86d7e06df801afb21e2a08e7551a0c74478d4db15d6d835a330062798c41194"
+  },
+  {
+   "path": "data/raw/phoenix/funding/SOL.parquet",
+   "symbol": "SOL",
+   "kind": "funding",
+   "rows": 8696,
+   "first_ms": 1763434800000,
+   "last_ms": 1794736801000,
+   "sha256": "35a1677199cfee51cb4f53850782267344b0e4700da3d42cbd6d3efaa386251e"
+  },
+  {
+   "path": "data/raw/phoenix/candles/15m/BTC.parquet",
+   "symbol": "BTC",
+   "kind": "candles_15m",
+   "rows": 36000,
+   "first_ms": 1762336800000,
+   "last_ms": 1794735900000,
+   "gaps": 0,
+   "sha256": "8b5767c709b14a68a4d1ea29e1a55cc5a7496e75716b21323a98155488e7f6e4"
+  },
+  {
+   "path": "data/raw/phoenix/candles/1h/BTC.parquet",
+   "symbol": "BTC",
+   "kind": "candles_1h",
+   "rows": 10000,
+   "first_ms": 1758736800000,
+   "last_ms": 1794733200000,
+   "gaps": 0,
+   "sha256": "c0e2c7207f1838713d03d7a98b886c236d74b4df86acb0b7530bd572ff8aafa1"
+  },
+  {
+   "path": "data/raw/phoenix/funding/BTC.parquet",
+   "symbol": "BTC",
+   "kind": "funding",
+   "rows": 8696,
+   "first_ms": 1763434800000,
+   "last_ms": 1794736801000,
+   "sha256": "3d023b743e7c683fd19197d2c912560a9b821bda24512058867de09f37c0d085"
+  },
+  {
+   "path": "data/raw/phoenix/candles/15m/ETH.parquet",
+   "symbol": "ETH",
+   "kind": "candles_15m",
+   "rows": 36000,
+   "first_ms": 1762336800000,
+   "last_ms": 1794735900000,
+   "gaps": 0,
+   "sha256": "5a1ad7163f56cc2d7dd0a9d82576e60c37bb2b7e069b1b86c06f7866b4ebda88"
+  },
+  {
+   "path": "data/raw/phoenix/candles/1h/ETH.parquet",
+   "symbol": "ETH",
+   "kind": "candles_1h",
+   "rows": 10000,
+   "first_ms": 1758736800000,
+   "last_ms": 1794733200000,
+   "gaps": 0,
+   "sha256": "7f1d7b5af6735453991fbe933960491fccb0fd2d02c3489152a3b4da3176624a"
+  },
+  {
+   "path": "data/raw/phoenix/funding/ETH.parquet",
+   "symbol": "ETH",
+   "kind": "funding",
+   "rows": 8696,
+   "first_ms": 1763434800000,
+   "last_ms": 1794736801000,
+   "sha256": "0deeccf38b58e8d01ed1b21cd315102039358297565d8dce52ee214635306225"
+  }
+ ],
+ "books": [
+  {
+   "symbol": "SOL",
+   "captured_ms": 1794737172320,
+   "bid": 71.97,
+   "ask": 71.98,
+   "half_spread": 6.94685654741585e-05,
+   "tick": 0.01,
+   "tick_frac": 0.00013893713094824593,
+   "bid_depth_1pct_usd": 1928252.6373,
+   "ask_depth_1pct_usd": 1928898.2728
+  },
+  {
+   "symbol": "BTC",
+   "captured_ms": 1794737204692,
+   "bid": 65438.0,
+   "ask": 65439.0,
+   "half_spread": 7.640761936780336e-06,
+   "tick": 1.0,
+   "tick_frac": 1.5281523873560673e-05,
+   "bid_depth_1pct_usd": 2749067.1095000003,
+   "ask_depth_1pct_usd": 2699577.8356999997
+  },
+  {
+   "symbol": "ETH",
+   "captured_ms": 1794737241824,
+   "bid": 1827.6,
+   "ask": 1827.7,
+   "half_spread": 2.7357535633227482e-05,
+   "tick": 0.1,
+   "tick_frac": 5.471507126638032e-05,
+   "bid_depth_1pct_usd": 1374042.8480999998,
+   "ask_depth_1pct_usd": 1619034.2375
+  }
+ ]
+}

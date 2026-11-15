@@ -56,7 +56,7 @@ Values are `PROPOSED` until a decision record marks them `APPROVED`. A proposed 
 | Max drawdown halt (from equity peak) | -10% | PROPOSED |
 | Consecutive-loss cooldown | 3 losses, then 24h pause | PROPOSED |
 | Minimum distance to liquidation at entry | 3x the stop distance | PROPOSED |
-| Cost model for backtests | Taker fee + half spread + 1 tick slippage per side + funding | PROPOSED |
+| Cost model for backtests | Taker fee + half spread + 1 tick slippage per side + funding | APPROVED ([0002](decisions/0002-pass-bar-and-costs.md)) |
 | Pilot capital and pilot max loss | none | HUMAN_DECISION_REQUIRED |
 
 ## Research integrity
