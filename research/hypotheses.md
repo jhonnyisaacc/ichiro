@@ -70,3 +70,15 @@ Append rows. Do not edit earlier rows.
 
 | Date | Hypothesis | Strategy version | Data range | Trials used | Result | Report |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-11-15 | H1 (S1, H4 off) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 1 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | H1+H4 (S1, H4 on) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 2 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S3 (H4 off) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 3 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S3+H4 (H4 on) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 4 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S4 (H4 off) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 5 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | S4+H4 (H4 on) | v0.1 | Phoenix SOL/BTC/ETH 2026-02-01 to 2026-11-15, holdout last 20% | 6 | pending | strategies/backtests/v0.1/ |
+| 2026-11-15 | H1 (S1, H4 off) | v0.1 | result for trial 1 | 1 | FAIL: holdout n=73, -0.279R, CI [-0.452, -0.096] | strategies/backtests/v0.1/2026-11-15-phoenix-majors/report.md |
+| 2026-11-15 | H1+H4 (S1, H4 on) | v0.1 | result for trial 2 | 2 | FAIL: holdout n=58, -0.268R, CI [-0.475, -0.054] | strategies/backtests/v0.1/2026-11-15-phoenix-majors/report.md |
+| 2026-11-15 | S3 (H4 off) | v0.1 | result for trial 3 | 3 | FAIL: holdout n=36, -0.115R, CI [-0.487, +0.282] | strategies/backtests/v0.1/2026-11-15-phoenix-majors/report.md |
+| 2026-11-15 | S3+H4 (H4 on) | v0.1 | result for trial 4 | 4 | FAIL: holdout n=32, -0.044R, CI [-0.453, +0.387] | strategies/backtests/v0.1/2026-11-15-phoenix-majors/report.md |
+| 2026-11-15 | S4 (H4 off) | v0.1 | result for trial 5 | 5 | INCONCLUSIVE: 1 signal, 0 trades | strategies/backtests/v0.1/2026-11-15-phoenix-majors/report.md |
+| 2026-11-15 | S4+H4 (H4 on) | v0.1 | result for trial 6 | 6 | INCONCLUSIVE: 1 signal, 0 trades | strategies/backtests/v0.1/2026-11-15-phoenix-majors/report.md |

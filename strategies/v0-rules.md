@@ -140,3 +140,61 @@ Every decision, including `no_trade` and skipped setups, writes a journal row us
 - Contest-style leverage and comeback sizing (martingale-like behavior).
 - Volume farming.
 - Discretionary overrides. A human can stop the system at any time but cannot force an entry through the rules.
+
+## v0.1 implementation spec (frozen 2026-11-15, before any scored run)
+
+This section pins down how the rules above are computed in the first backtest. Where it is narrower than the prose above, this section wins for v0.1.
+
+### Data and split
+
+- Markets: Phoenix SOL, BTC, ETH, pooled. Manifest: `data/manifests/phoenix-v0.1.json`.
+- Phoenix trading was thin before February 2026: under $2M per month per market. Scored data therefore starts at 2026-02-01 00:00 UTC. Earlier bars are used only to warm up features.
+- Holdout: the last 20% of the scored span by time, the same cutoff for all markets. The first 80% is development, reported in 3 equal folds. No parameter is fitted on any fold.
+- Costs per side: taker 3.5 bp, plus the half spread and 1 tick measured from the order-book snapshot in the manifest. Funding: the hourly Phoenix series, charged on notional while the position is open. Positive rate means longs pay.
+
+### Features (all from closed bars only)
+
+- ATR(14): Wilder. EMA: standard span. RSI(14): Wilder.
+- 1h features are joined to 15m bars from the last fully closed 1h bar.
+- `vol_z`: the 24h rolling sum of 1h quote volume, z-scored against the previous 30 days of that series.
+- `rv_pct`: the percentile of the 24h realized volatility of 1h log returns against the previous 30 days.
+- `atr_pct`: the percentile of ATR(14, 1h)/close against the previous 30 days.
+- `funding_8h`: the last hourly rate times 8.
+
+### Regime and filters
+
+- `hot`: `vol_z >= 2.0` and `rv_pct >= 0.70`.
+- `trend_up`: EMA(20, 1h) above EMA(50, 1h), and the last closed 4h close above EMA(50, 4h). `trend_down` is the mirror. `range` is neither.
+- Base filter, always on: `|funding_8h| <= 0.001`.
+- H4 filter, the variable under test: `0.20 <= atr_pct <= 0.95` and `rv_pct >= 0.20`. Spread history does not exist, so the spread part of H4 is not tested.
+- Not testable on history, so not applied in the backtest: depth, venue health, data staleness, macro blackout. The paper bot applies the depth and staleness checks.
+
+### Setups
+
+- S1 (15m, scalp): regimes `hot` or `range`. Long: `low < min(low[t-20..t-1])`, `close > that min`, and `(min(open, close) - low) >= 2 × |close - open|`, with a zero body counting as a pass when the wick is positive. Short is the mirror on highs. Stop: the wick extreme ∓ 0.25 × ATR(14, 15m). TP1 at 1R. TP2 at whichever is nearer to entry: the midpoint of the 20-bar range, or 2R. If the midpoint is not beyond TP1, TP2 equals 2R.
+- S3 (1h, swing): long in `trend_up`. A pullback is a bar whose low touches EMA(20) while its close stays above it. Entry fires when a later bar, within 6 bars, closes above that pullback bar's high. Stop: the pullback low minus 0.5 × ATR(14, 1h). TP1 at 1.5R, then trail. Short is the mirror. Skip a long if `funding_8h` is above its trailing 30-day 90th percentile, and a short if below the 10th.
+- S4 (1h, swing): regime `range`. Long: the previous bar closed at least 2.5 standard deviations below the 50-bar mean with RSI(14) under 20, and this bar closes back above mean − 2.0 standard deviations. Stop: the lowest low of the last 3 bars minus 0.5 × ATR(14, 1h). Single target: the 50-bar mean at signal time, closing the full position. Short is the mirror.
+
+### Fills and exits
+
+- Entry: taker at the next bar's open, plus costs.
+- Within a bar, the stop is checked before any target. A stop fills at the worse of the stop price and the bar's open. A target fills at its price only if the bar trades through it.
+- TP1 closes 50% and moves the stop to entry plus round-trip costs. TP2 closes the rest. In S3, after TP1 the stop trails at the highest close since entry minus 2 × ATR(14, 1h), and it never loosens.
+- Time stops: S1 4h, S3 72h, S4 24h, closed at the next bar's open.
+- Funding exit: if accrued funding cost exceeds 0.3R, close at the next bar's open.
+
+### Sizing and overlays
+
+- Paper equity starts at $10,000. Risk is 0.5% of current equity. `notional = risk / (stop_distance + round_trip_cost)`.
+- Leverage caps: 5x for S1, 3x for S3 and S4. A capped trade keeps its stop, so its R is smaller in dollars. Results are measured in R relative to each trade's own dollar risk.
+- Liquidation distance is approximated as `0.5 / leverage`. Skip if that is below 3 × the stop distance.
+- Overlays, across all markets and setups within one trial:
+  - Only 1 open position, because SOL, BTC and ETH count as one correlated cluster.
+  - At most 4 entries per market per 24h.
+  - Daily stop at −2%, weekly stop at −5%.
+  - Drawdown halt at −10%. In the backtest a halt pauses entries for 7 days instead of requiring a human.
+  - Loss streak: after 3 consecutive losses, a 24h pause.
+
+### Trials
+
+Six trials, each scored once on the holdout: S1, S3 and S4, each with H4 off and on. A random-entry baseline per trial uses the same number of entries on random bars of the same markets, random direction, the trial's median stop distance in ATR, and the same exit rules. The baseline does not count as a trial.
