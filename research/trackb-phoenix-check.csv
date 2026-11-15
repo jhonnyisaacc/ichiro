@@ -1,0 +1,10 @@
+event,symbol,open_utc,phoenix_first_bar_before_open,phoenix_24h_volume_usd,phoenix_status,phoenix_ret,phoenix_exit,binance_ret,binance_stopped
+H0084,TAO,2026-02-16 07:05,False,0,no_phoenix_data,,,0.014690513994320167,False
+H0087,SKR,2026-02-24 07:05,False,0,no_phoenix_data,,,-0.0080763582628747,False
+H0137,CHIP,2026-04-21 13:05,False,0,no_phoenix_data,,,-0.21376119402985072,True
+H0152,MEGA,2026-04-30 11:05,True,81142,closed,0.15206484355789013,time,0.2038928208393039,False
+H0168,VVV,2026-05-12 07:05,False,0,no_phoenix_data,,,0.1618133373408406,False
+H0237,DRV,2026-07-14 08:05,False,0,no_phoenix_data,,,,
+H0288,CRV,2026-08-21 04:05,True,141520,closed,-0.0828104453449521,time,-0.08117760726589426,False
+H0328,PONS,2026-10-08 05:05,True,100676,closed,0.144048526666711,time,0.14296760168302938,False
+H0349,HYPE,2026-11-10 06:05,True,985206,closed,0.037680447270724365,time,0.02917780722182088,False
