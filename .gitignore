@@ -1,0 +1,6 @@
+data/raw/
+data/derived/
+journal/
+.venv/
+__pycache__/
+.ipynb_checkpoints/
