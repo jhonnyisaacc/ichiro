@@ -204,7 +204,7 @@ class Simulator:
         self.entries[m].append(t0)
         return None
 
-    def run(self, signals_by_market, start_ms, end_ms):
+    def run(self, signals_by_market, start_ms, end_ms, close_at_end=True):
         events = []
         for m, f in self.frames.items():
             sig_at = {s.i: s for s in signals_by_market.get(m, [])}
@@ -229,11 +229,11 @@ class Simulator:
                 why = self.can_enter(m, close_ms)
                 if why is None and i + 1 < len(f):
                     self.pending = (m, sig, close_ms)
-                    self.decisions.append({"ms": close_ms, "market": m, "action": "enter", "side": sig.side})
+                    self.decisions.append({"ms": close_ms, "market": m, "action": "enter", "side": sig.side, "stop": sig.stop})
                 else:
                     self.decisions.append({"ms": close_ms, "market": m, "action": "no_trade",
                                            "reason": why or "end_of_data"})
-        if self.pos is not None:
+        if self.pos is not None and close_at_end:
             f = self.frames[self.pos.market]
             last = f[f["time_ms"] < end_ms].iloc[-1]
             self.close_part(self.pos, float(last["close"]), 1.0, int(last["close_ms"]), "end_of_data")
