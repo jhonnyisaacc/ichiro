@@ -1,0 +1,82 @@
+name: hygiene
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+concurrency:
+  group: '${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: true
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Current tree only. History-scanning Gitleaks stays off until
+          # scripts/check-secrets.sh passes and fixtures are allowlisted.
+          fetch-depth: 1
+      # BEGIN binah hygiene
+      - name: check out gates
+        if: github.event_name == 'pull_request'
+        env:
+          DEFAULT_BRANCH: '${{ github.event.repository.default_branch }}'
+        run: |
+          git fetch --depth 1 origin "$DEFAULT_BRANCH"
+          git worktree add --detach "$RUNNER_TEMP/binah-base" FETCH_HEAD
+          for rel in scripts/check-branch-name.sh scripts/check-pr-body.sh scripts/check-one-pr.sh scripts/check-secrets.sh scripts/check-guardrails-alone.sh scripts/check-agent-layout.sh scripts/lib/common.sh policy/branch-name.regex policy/secret-allowlist policy/integration-branches; do
+            if [ ! -e "$RUNNER_TEMP/binah-base/$rel" ] && [ -e "$rel" ]; then
+              mkdir -p "$(dirname "$RUNNER_TEMP/binah-base/$rel")"
+              cp "$rel" "$RUNNER_TEMP/binah-base/$rel"
+              printf '::warning::%s is not on %s yet, so this pull grades itself with its own copy\n' "$rel" "$DEFAULT_BRANCH"
+            fi
+          done
+      - name: branch name
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_REF: '${{ github.head_ref }}'
+        run: |
+          bash "$RUNNER_TEMP/binah-base/scripts/check-branch-name.sh" "$HEAD_REF"
+      - name: pull request body
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: '${{ github.token }}'
+          PR_NUMBER: '${{ github.event.pull_request.number }}'
+        run: |
+          body="${RUNNER_TEMP}/pr-body.md"
+          gh pr view "$PR_NUMBER" --json body --jq .body >"$body"
+          mapfile -t files < <(gh pr view "$PR_NUMBER" --json files --jq '.files[].path')
+          bash "$RUNNER_TEMP/binah-base/scripts/check-pr-body.sh" "$body" "${files[@]}"
+      - name: one pull request, one job
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: '${{ github.token }}'
+          PR_NUMBER: '${{ github.event.pull_request.number }}'
+        run: |
+          bash "$RUNNER_TEMP/binah-base/scripts/check-one-pr.sh" --repo "$GITHUB_REPOSITORY" --number "$PR_NUMBER"
+      - name: secret scan
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            bash "$RUNNER_TEMP/binah-base/scripts/check-secrets.sh" "$GITHUB_WORKSPACE"
+          else
+            bash scripts/check-secrets.sh
+          fi
+      - name: guardrail changes ride alone
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: '${{ github.token }}'
+          PR_NUMBER: '${{ github.event.pull_request.number }}'
+        run: |
+          bash "$RUNNER_TEMP/binah-base/scripts/check-guardrails-alone.sh" --repo "$GITHUB_REPOSITORY" --number "$PR_NUMBER"
+      - name: agent layout
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            bash "$RUNNER_TEMP/binah-base/scripts/check-agent-layout.sh"
+          else
+            bash scripts/check-agent-layout.sh
+          fi
+      # END binah hygiene

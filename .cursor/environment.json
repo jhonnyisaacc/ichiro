@@ -1,0 +1,4 @@
+{
+  "install": "bash scripts/agent-preflight.sh",
+  "start": "bash scripts/agent-preflight.sh"
+}
