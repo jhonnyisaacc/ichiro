@@ -2,6 +2,7 @@
 
 - Date: 2026-11-15
 - Decided by: Jhonny
+- Recorded by: an agent, from Jhonny's answers in the 2026-11-15 planning session
 - Status: accepted
 
 ## Context

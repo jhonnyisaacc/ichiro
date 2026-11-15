@@ -17,7 +17,7 @@
 | Metric | Value | Label | Source |
 | --- | --- | --- | --- |
 | Season volume | about $187M or more | UNVERIFIED | brief |
-| Weekly volume, one week | $9M, ranked first | SOURCED (weak) | https://www.frontiertraders.com/campaigns/soleco-perps |
+| Sol Eco Perps campaign volume | $8.68M, ranked #5 | SOURCED (weak) | https://www.frontiertraders.com/campaigns/soleco-perps |
 | Grand Final result | Champion, about $152K profit after a loss of about $50K | UNVERIFIED | unretrieved KuCoin community post |
 
 ## Extractable rules

@@ -34,7 +34,7 @@ The finalist list and seat labels come from the event page [S4].
 ### idatsy (online winner seat)
 
 - Seat: "online winner." `SOURCED` [S4]
-- Season Volume Champion, about $187M or more in volume. `UNVERIFIED`. One weekly volume board shows idatsy first with $9M in a week. `SOURCED (weak)` [S5]
+- Season Volume Champion, about $187M or more in volume. `UNVERIFIED`. The Sol Eco Perps volume board lists iDatsY at #5 with $8.68M. `SOURCED (weak)` [S5]
 - Public GitHub shows Rust and Python infrastructure work, including a QuestDB wrapper, a uv Python template, and Solana and Ethereum protocol tooling. `SOURCED` [S6]
 - Style: very aggressive, high-leverage directional swings and fast flips, with composure under pressure. `UNVERIFIED`
 - Reported Grand Final path: a deep drawdown, then a late recovery to first. `UNVERIFIED`
